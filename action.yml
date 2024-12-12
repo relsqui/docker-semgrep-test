@@ -7,10 +7,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
     - run: |
         docker run --rm -v  "${PWD}:/src" \
         -e SEMGREP_APP_TOKEN=${{ inputs.semgrep-app-token }} \
