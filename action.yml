@@ -9,10 +9,9 @@ runs:
   steps:
     - name: Checkout
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
     - run: |
-        git branch
-        git pull ${GITHUB_BASE_REF}
-        git branch
         docker run --rm -v  "${PWD}:/src" \
         -e SEMGREP_APP_TOKEN=${{ inputs.semgrep-app-token }} \
         -e SEMGREP_REPO_NAME=${GITHUB_REPOSITORY} \
