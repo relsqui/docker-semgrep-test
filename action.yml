@@ -8,6 +8,8 @@ runs:
   using: composite
   steps:
     - run: |
+        git branch
+        git ls-files
         docker run --rm -v  "${PWD}:/src" \
         -e SEMGREP_APP_TOKEN=${{ inputs.semgrep-app-token }} \
         -e SEMGREP_REPO_NAME=${GITHUB_REPOSITORY} \
