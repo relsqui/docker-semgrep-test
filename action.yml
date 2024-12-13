@@ -8,6 +8,8 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
     - run: |
         echo "merge base:"
         git merge-base origin/main HEAD
