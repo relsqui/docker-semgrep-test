@@ -12,14 +12,14 @@ runs:
         fetch-depth: 0
     - run: |
         echo "merge base:"
-        git merge-base ${GITHUB_HEAD_REF} HEAD
+        git merge-base ${GITHUB_BASE_REF} HEAD
         docker run --rm -v  "${PWD}:/src" \
         -e SEMGREP_APP_TOKEN=${{ inputs.semgrep-app-token }} \
         -e SEMGREP_REPO_NAME=${GITHUB_REPOSITORY} \
         -e SEMGREP_BRANCH=${GITHUB_REF} \
         -e SEMGREP_COMMIT=${{ github.event.pull_request.head.sha }} \
         -e SEMGREP_PR_ID=${{github.event.pull_request.number}} \
-        -e SEMGREP_BASELINE_COMMIT=$(git merge-base ${GITHUB_HEAD_REF} HEAD) \
+        -e SEMGREP_BASELINE_COMMIT=$(git merge-base ${GITHUB_BASE_REF} HEAD) \
         semgrep/semgrep:latest-nonroot \
         semgrep ci
       shell: bash
