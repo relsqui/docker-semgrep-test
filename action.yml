@@ -9,6 +9,8 @@ runs:
   steps:
     - uses: actions/checkout@v4
     - run: |
+        echo "merge base:"
+        git merge-base remotes/origins/main HEAD
         docker run --rm -v  "${PWD}:/src" \
         -e SEMGREP_APP_TOKEN=${{ inputs.semgrep-app-token }} \
         -e SEMGREP_REPO_NAME=${GITHUB_REPOSITORY} \
