@@ -8,11 +8,10 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
     - run: |
         echo "merge base:"
         git merge-base origin/${GITHUB_BASE_REF} HEAD
+        git fetch origin/${GITHUB_BASE_REF}
         docker run --rm -v  "${PWD}:/src" \
         -e SEMGREP_APP_TOKEN=${{ inputs.semgrep-app-token }} \
         -e SEMGREP_REPO_NAME=${GITHUB_REPOSITORY} \
