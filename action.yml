@@ -9,7 +9,7 @@ runs:
   steps:
     - uses: actions/checkout@v4
     - run: |
-        git fetch origin/${GITHUB_BASE_REF}
+        git fetch origin ${GITHUB_BASE_REF}
         echo "merge base:"
         git merge-base origin/${GITHUB_BASE_REF} HEAD
         docker run --rm -v  "${PWD}:/src" \
