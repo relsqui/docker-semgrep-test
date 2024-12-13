@@ -8,8 +8,6 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v4
-      with:
-        fetch-depth: 2
     - run: |
         git branch
         git ls-files
@@ -19,7 +17,7 @@ runs:
         -e SEMGREP_BRANCH=${GITHUB_REF} \
         -e SEMGREP_COMMIT=${{ github.event.pull_request.head.sha }} \
         -e SEMGREP_PR_ID=${{github.event.pull_request.number}} \
-        -e SEMGREP_BASELINE_REF=HEAD^ \
+        -e SEMGREP_BASELINE_REF=$(git merge-base remotes/origins/main HEAD) \
         semgrep/semgrep:latest-nonroot \
         semgrep ci
       shell: bash
