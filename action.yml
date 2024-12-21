@@ -8,23 +8,7 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v4
-      # with:
-      #   fetch-depth: 0
-    - run: git show-ref
-      shell: bash
-    - run: git ls-remote
-      shell: bash
     - run: |
-        # git fetch origin "refs/heads/${GITHUB_BASE_REF}"
-        # git show-ref
-        # docker run --rm -v  "${PWD}:/src" \
-        # -e SEMGREP_APP_TOKEN=${{ inputs.semgrep-app-token }} \
-        # -e SEMGREP_REPO_NAME=${GITHUB_REPOSITORY} \
-        # -e SEMGREP_BRANCH=${GITHUB_REF} \
-        # -e SEMGREP_COMMIT=${{ github.event.pull_request.head.sha }} \
-        # -e SEMGREP_PR_ID=${{github.event.pull_request.number}} \
-        # -e SEMGREP_BASELINE_REF="refs/remotes/origin/${GITHUB_BASE_REF}" \
-        # semgrep/semgrep:latest-nonroot \
         pipx install semgrep
         semgrep --version
         SEMGREP_APP_TOKEN="${{ inputs.semgrep-app-token }}" semgrep ci
