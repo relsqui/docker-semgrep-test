@@ -9,7 +9,7 @@ runs:
   steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 2
+        fetch-depth: 0
     - run: |
         SEMGREP_BASELINE_REF="$(git merge-base $GITHUB_REF $GITHUB_BASE_REF)"
         echo "SEMGREP_BASE_REF=$SEMGREP_BASELINE_REF"
