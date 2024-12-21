@@ -15,16 +15,13 @@ runs:
     - run: git ls-remote
       shell: bash
     - run: |
-        # echo git merge-base "$GITHUB_REF" "$GITHUB_BASE_REF"
-        # SEMGREP_BASELINE_REF="$(git merge-base $GITHUB_REF $GITHUB_BASE_REF)"
-        # echo "SEMGREP_BASE_REF=$SEMGREP_BASELINE_REF"
-        # docker run --rm -v  "${PWD}:/src" \
-        # -e SEMGREP_APP_TOKEN=${{ inputs.semgrep-app-token }} \
-        # -e SEMGREP_REPO_NAME=${GITHUB_REPOSITORY} \
-        # -e SEMGREP_BRANCH=${GITHUB_REF} \
-        # -e SEMGREP_COMMIT=${{ github.event.pull_request.head.sha }} \
-        # -e SEMGREP_PR_ID=${{github.event.pull_request.number}} \
-        # -e SEMGREP_BASELINE_REF="refs/remotes/origin/${GITHUB_BASE_REF}" \
-        # semgrep/semgrep:latest-nonroot \
-        # semgrep ci
+        docker run --rm -v  "${PWD}:/src" \
+        -e SEMGREP_APP_TOKEN=${{ inputs.semgrep-app-token }} \
+        -e SEMGREP_REPO_NAME=${GITHUB_REPOSITORY} \
+        -e SEMGREP_BRANCH=${GITHUB_REF} \
+        -e SEMGREP_COMMIT=${{ github.event.pull_request.head.sha }} \
+        -e SEMGREP_PR_ID=${{github.event.pull_request.number}} \
+        -e SEMGREP_BASELINE_REF="refs/heads/${GITHUB_BASE_REF}" \
+        semgrep/semgrep:latest-nonroot \
+        semgrep ci
       shell: bash
