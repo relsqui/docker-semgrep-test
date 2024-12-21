@@ -15,10 +15,9 @@ runs:
     - run: git ls-remote
       shell: bash
     - run: |
-        git show-ref
         echo git merge-base "$GITHUB_REF" "$GITHUB_BASE_REF"
-        SEMGREP_BASELINE_REF="$(git merge-base $GITHUB_REF $GITHUB_BASE_REF)"
-        echo "SEMGREP_BASE_REF=$SEMGREP_BASELINE_REF"
+        # SEMGREP_BASELINE_REF="$(git merge-base $GITHUB_REF $GITHUB_BASE_REF)"
+        # echo "SEMGREP_BASE_REF=$SEMGREP_BASELINE_REF"
         docker run --rm -v  "${PWD}:/src" \
         -e SEMGREP_APP_TOKEN=${{ inputs.semgrep-app-token }} \
         -e SEMGREP_REPO_NAME=${GITHUB_REPOSITORY} \
