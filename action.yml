@@ -15,7 +15,8 @@ runs:
     - run: git ls-remote
       shell: bash
     - run: |
-        git fetch "refs/heads/${GITHUB_BASE_REF}"
+        git fetch origin "refs/heads/${GITHUB_BASE_REF}"
+        git show-ref
         docker run --rm -v  "${PWD}:/src" \
         -e SEMGREP_APP_TOKEN=${{ inputs.semgrep-app-token }} \
         -e SEMGREP_REPO_NAME=${GITHUB_REPOSITORY} \
