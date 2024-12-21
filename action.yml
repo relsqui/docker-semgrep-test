@@ -25,7 +25,7 @@ runs:
         -e SEMGREP_BRANCH=${GITHUB_REF} \
         -e SEMGREP_COMMIT=${{ github.event.pull_request.head.sha }} \
         -e SEMGREP_PR_ID=${{github.event.pull_request.number}} \
-        -e SEMGREP_BASELINE_REF="$SEMGREP_BASELINE_REF" \
+        -e SEMGREP_BASELINE_REF="refs/remotes/origin/${GITHUB_BASE_REF}" \
         semgrep/semgrep:latest-nonroot \
         semgrep ci
       shell: bash
